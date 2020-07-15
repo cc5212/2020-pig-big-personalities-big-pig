@@ -16,4 +16,4 @@ std = foreach tmp GENERATE SQRT(tmp) as std;
 
 afk = filter sum by time_in_test > (mean.avg + 2 * std.std);
 
-afk_count = foreach afk GENERATE COUNT(afk);
+afk_count = foreach (group afk all) GENERATE COUNT(afk.time_in_test);
